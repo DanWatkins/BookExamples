@@ -33,19 +33,19 @@ namespace SinglyLinkedList
 	};
 	
 	
-	typename<typename T>
+	template<typename T>
 	class List
 	{
 		public:
 			List() : mSize(0), mHead(nullptr), mTail(nullptr) {}
 			
 			int size() { return mSize; }
-			Node* head() { return mHead; }
-			Node* tail() { return mTail; }
+			Node<T>* head() { return mHead; }
+			Node<T>* tail() { return mTail; }
 		
 			void append(T value)
 			{
-				Node *node = new Node(new T(value));
+				Node<T> *node = new Node<T>(new T(value));
 				
 				if (mSize == 0)
 				{
@@ -68,8 +68,8 @@ namespace SinglyLinkedList
 		
 		private:
 			int mSize;
-			Node<T> mHead, mTail;
-	}
+			Node<T> *mHead, *mTail;
+	};
 }
 
 #endif
