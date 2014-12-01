@@ -15,13 +15,13 @@ typedef SinglyLinkedList::Node<int> Node;
  * Lists contain integers in reverse order. So the number 3762 should represented
  * in a list as 2, 6, 7, 3.
  */
-Node* add(Node *a, Node *b)
+Node* add(const Node *a, const Node *b)
 {
 	Node *sumList = new Node();
 	Node *head = sumList;
 	bool spill = false;
-	Node *ia = a;
-	Node *ib = b;
+	const Node *ia = a;
+	const Node *ib = b;
 	
 	while (ia || ib || spill)
 	{
