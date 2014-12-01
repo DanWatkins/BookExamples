@@ -4,26 +4,8 @@
 
 typedef SinglyLinkedList::Node<int> Node;
 
-/*
- * Returns the Node at the start of a circularly linked list inside of the list.
- * If there is not a circular list inside, nullptr is returned.
- */
-Node *findCircularStart(const Node *head)
+bool isPalindrome(const Node *node)
 {
-	std::set<const Node*> previousNodes;
-	const Node *iter = head;
-	
-	while (iter != nullptr)
-	{
-		previousNodes.insert(iter);
-		
-		if (previousNodes.find(iter->next) != previousNodes.end())
-			return iter->next;
-			
-		iter = iter->next;
-	}
-	
-	return nullptr;
 }
 
 

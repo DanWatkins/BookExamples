@@ -1,10 +1,3 @@
-//==================================================================================================================|
-// Created 2014.11.26 by Daniel L. Watkins
-//
-// Copyright (C) 2014 Daniel L. Watkins
-// This file is licensed under the MIT License.
-//==================================================================================================================|
-
 #ifndef _SINGLY_LINKED_LIST_H
 #define _SINGLY_LINKED_LIST_H
 
@@ -38,6 +31,45 @@ namespace SinglyLinkedList
 			}
 		}
 	};
+	
+	
+	typename<typename T>
+	class List
+	{
+		public:
+			List() : mSize(0), mHead(nullptr), mTail(nullptr) {}
+			
+			int size() { return mSize; }
+			Node* head() { return mHead; }
+			Node* tail() { return mTail; }
+		
+			void append(T value)
+			{
+				Node *node = new Node(new T(value));
+				
+				if (mSize == 0)
+				{
+					mHead = node;
+					mTail = node;
+				}
+				else if (mSize == 1)
+				{
+					mHead->next = node;
+					mTail = node;
+				}
+				else
+				{
+					mTail->next = node;
+					mTail = node;
+				}
+				
+				++mSize;
+			}
+		
+		private:
+			int mSize;
+			Node<T> mHead, mTail;
+	}
 }
 
 #endif

@@ -1,10 +1,3 @@
-//==================================================================================================================|
-// Created 2014.11.26 by Daniel L. Watkins
-//
-// Copyright (C) 2014 Daniel L. Watkins
-// This file is licensed under the MIT License.
-//==================================================================================================================|
-
 #include <iostream>
 #include "Common/SinglyLinkedList.hpp"
 
