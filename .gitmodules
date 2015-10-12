@@ -1,0 +1,3 @@
+[submodule "CppConcurrencyInAction/Ext/ValpineBase"]
+	path = CppConcurrencyInAction/Ext/ValpineBase
+	url = http://github.com/Valpineware/ValpineBase.git
