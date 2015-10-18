@@ -3,7 +3,6 @@
 // This file is licensed under the MIT License.
 //=============================================================================|
 
-#include <ValpineBase/Test.h>
 #include <extra_AtomicCounter.h>
 
 #include <condition_variable>
@@ -12,34 +11,33 @@
 #include <list>
 #include <iostream>
 
+#include <ValpineBase/Test.h>
+#include <ValpineBase/Concurrent/Latch.h>
+
 using namespace vbase;
 
 class Test_extra_AtomicCounter : public test::Class
 {
 	Q_OBJECT
 
-	std::condition_variable _cv;
-	std::mutex _mutex;
 	AtomicCounter _atomicCounter;
-	const uint64_t _incrementTimes = 100000;
+	const uint64_t _incrementTimes = 10000;
 
 private slots:
 	VTEST void t1()
 	{
 		std::list<std::thread> threads;
+		concurrent::Latch latch;
 
+		//create all the threads we need
 		{
-			std::lock_guard<std::mutex> lk(_mutex);
 			const unsigned threadCount = std::thread::hardware_concurrency()*4;
 
 			for (unsigned i=0; i<threadCount; i++)
 			{
-				threads.push_back(std::thread([this]
+				threads.push_back(std::thread([this, &latch]
 				{
-					{
-						std::unique_lock<std::mutex> myLk(_mutex);
-						_cv.wait(myLk, []{ return true; });
-					}
+					latch.wait();
 
 					for (uint64_t i=0; i<_incrementTimes; i++)
 						++_atomicCounter;
@@ -47,12 +45,13 @@ private slots:
 			}
 		}
 
-		_cv.notify_all();
+		//TODO latch needs a way to wait for all threads to wait
+		latch.unlock();
 
 		for (auto &t : threads)
 			t.join();
 
-		Verify_Eq(_atomicCounter.value(), _incrementTimes * threads.size());
+		VerifyEq(_atomicCounter.value(), _incrementTimes * threads.size());
 	}
 };
 

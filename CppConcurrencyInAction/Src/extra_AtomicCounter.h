@@ -9,7 +9,7 @@ class AtomicCounter
 public:
 	AtomicCounter& operator ++()
 	{
-		//std::lock_guard<std::mutex> lk(_mutex);
+		std::lock_guard<std::mutex> lk(_mutex);
 		++_counter;
 
 		return *this;
