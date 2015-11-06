@@ -21,7 +21,7 @@ class Test_extra_AtomicCounter : public test::Class
 	Q_OBJECT
 
 	AtomicCounter _atomicCounter;
-	const uint64_t _incrementTimes = 10000;
+	const uint64_t _incrementTimes = 1000;
 
 private slots:
 	VTEST void t1()
@@ -31,7 +31,7 @@ private slots:
 
 		//create all the threads we need
 		{
-			const unsigned threadCount = std::thread::hardware_concurrency()*4;
+			const unsigned threadCount = std::thread::hardware_concurrency()*5;
 
 			for (unsigned i=0; i<threadCount; i++)
 			{
