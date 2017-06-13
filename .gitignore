@@ -27,3 +27,7 @@
 *.out
 *.app
 *.user*
+
+CrackingTheCodeInterview/Rust/01_01_unique_characters/target/
+
+CrackingTheCodeInterview/Rust/01_01_unique_characters/Cargo\.lock
